@@ -1,0 +1,235 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+<!-- 
+Template Name: BRILLIANT Bootstrap Admin Template
+Version: 4.5.6
+Author: WebThemez
+Website: http://www.webthemez.com/ 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>FuHua万能视频解析</title>
+    <!-- Bootstrap Styles-->
+    <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="{% static '/css/font-awesome.css'%}" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="{% static '/js/morris/morris-0.4.3.min.css'%}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="{% static '/css/custom-styles.css'%}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="{% static '/js/Lightweight-Chart/cssCharts.css'%}">
+
+
+
+<style>
+    button{undefined
+
+width:300px;
+
+height: 30px;
+
+background-color: #00aeec;
+
+border-radius: 15%/25%;
+border:none
+
+}
+</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> FuHua视频解析</strong></a>
+				
+		<div id="sideNav" href="">
+		<i class="fa fa-bars icon"></i> 
+		</div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <!-- /.dropdown -->
+
+                <!-- /.dropdown -->
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i>
+                        {% if request.session.username %}
+                            {{request.session.username}}
+                        {% else %}
+                            {% if request.COOKIES.username%}
+                                {{request.COOKIES.username}}
+                            {% endif %}
+                        {% endif %}
+
+
+
+                    </i><i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+
+                        <li><a href="/user/exit"><i class="fa fa-sign-out fa-fw"></i>退出登录</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a class="active-menu" href="/index/0"><i class="fa fa-dashboard"></i> 主解析器</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 更换线路<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/index/1">1</a>
+                            </li>
+                            <li>
+                                <a href="/index/2">2</a>
+                            </li>
+                            <li>
+                                <a href="/index/3">3</a>
+                            </li>
+                            <li>
+                                <a href="/index/4">4</a>
+                            </li>
+                            <li>
+                                <a href="/index/5">5</a>
+                            </li>
+                            <li>
+                                <a href="#">6</a>
+                            </li>
+                            <li>
+                                <a href="#">7</a>
+                            </li>
+                            <li>
+                                <a href="#">8</a>
+                            </li>
+                            <li>
+                                <a href="#">9</a>
+                            </li>
+                            <li>
+                                <a href="#">10</a>
+                            </li>
+                            <li>
+                                <a href="#">11</a>
+                            </li>
+                            <li>
+                                <a href="#">12</a>
+                            </li>
+                            <li>
+                                <a href="#">13</a>
+                            </li>
+                            <li>
+                                <a href="#">14</a>
+                            </li>
+                            <li>
+                                <a href="#">15</a>
+                            </li>
+                            <li>
+                                <a href="#">9</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+
+                    <li>
+                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> 打赏团队</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+      
+		<div id="page-wrapper">
+		  <div class="header"> 
+                        <h1 class="page-header">
+                            欢迎使用FuHua视频 <small>如果视频卡顿请到左侧更改线路</small>
+                        </h1>
+
+                            <form method="post">
+                        {% csrf_token %}
+                                <div>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="请输入需要解析的网页          或             搜所您想看的电影、电视剧、综艺" style="width:1000px;display:inline;">
+                                    <button v-on="click:onSubmit"  style="display:inline"type="submit"><font color="white" size="3"> 解析 </font></button>
+                                </div>
+
+                            </form>
+<p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p>
+
+
+		</div>
+            <br>
+            <div >
+
+                <embed width='1200' height="650" src="{{request.COOKIES.last_web}}"/>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+
+
+
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
+    <!-- Bootstrap Js -->
+    <script src="{% static '/js/bootstrap.min.js'%}"></script>
+	 
+    <!-- Metis Menu Js -->
+    <script src="{% static '/js/jquery.metisMenu.js'%}"></script>
+    <!-- Morris Chart Js -->
+    <script src="{% static '/js/morris/raphael-2.1.0.min.js'%}"></script>
+    <script src="{% static '/js/morris/morris.js'%}"></script>
+	
+	
+	<script src="{% static '/js/easypiechart.js'%}"></script>
+	<script src="{% static '/js/easypiechart-data.js'%}"></script>
+	
+	 <script src="{% static '/js/Lightweight-Chart/jquery.chart.js'%}"></script>
+	
+    <!-- Custom Js -->
+    <script src="{% static '/js/custom-scripts.js'%}"></script>
+
+      
+    <!-- Chart Js -->
+    <script type="text/javascript" src="{% static '/js/Chart.min.js'%}"></script>
+    <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>
+
+</body>
+
+</html>
