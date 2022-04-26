@@ -1,0 +1,62 @@
+import traceback
+
+from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
+import re
+from django.core import mail
+
+from vedio import settings
+
+try:
+
+    from django.utils.deprecation import MiddlewareMixin  # Django 1.10.x
+except ImportError:
+    MiddlewareMixin = object  # Django 1.4.x - Django 1.9.x
+
+class SimpleMiddleware(MiddlewareMixin):
+    def process_request(self, request):
+        if re.match("^/admin/", request.path):
+            return None
+        elif request.path == '/busy/':
+
+            return None
+        elif request.COOKIES.get('res_code'):
+            if request.path != '/user/login/' and request.path != '/user/register/' and not re.match("^/user/check/", request.path) and not re.match("^/user/forget/", request.path):
+
+                if  request.session.get('username') or request.COOKIES.get('username') :
+                    if not re.match("^/index/", request.path) and request.path != '/user/exit/':
+
+                        return HttpResponseRedirect('/index')
+                elif request.path == '/user/register/':
+                    return HttpResponseRedirect('/user/register')
+                elif request.path == '/user/check/' and request.path == '/user/check/resend/':
+                    return HttpResponseRedirect(request.path)
+                elif request.path == '/user/forget/new/' and request.path == '/user/forget/check/'and request.path == '/user/forget/check/resend/' and request.path == '/user/forget/':
+                    return HttpResponseRedirect(request.path)
+                else:
+                    return HttpResponseRedirect('/user/login/')
+
+        else:
+
+            if request.path != '/user/login/' and request.path != '/user/register/' and request.path != '/user/forget/':
+
+                if  request.session.get('username') or request.COOKIES.get('username') :
+                    if not re.match("^/index/", request.path) and request.path != '/user/exit/':
+
+                        return HttpResponseRedirect('/index')
+                elif request.path == '/user/register/':
+                    return HttpResponseRedirect('/user/register')
+                elif request.path == '/user/forget/':
+                    return HttpResponseRedirect('/user/forget/')
+                else:
+                    return HttpResponseRedirect('/user/login/')
+
+# class IpMiddleware(MiddlewareMixin):
+#     def process_request(self, request):
+#         ip_address=request.META['REMOTE_ADDR']
+#         print('我的地址'+ip_address)
+
+class ExceptionMW(MiddlewareMixin):
+    def process_exception(self,request,exception):
+
+        mail.send_mail(subject='Note_Cloud报错啦~',message=traceback.format_exc(),from_email='352446506@qq.com',recipient_list=settings.EX_EMAIL)
+        return HttpResponseRedirect('/busy')

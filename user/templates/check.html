@@ -1,0 +1,91 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>离进入FuHua就差一步啦 </title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="{% static 'user_css/style.css'%}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'user_css/font-awesome.css'%}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'user_css/font-awesome.min.css'%}" type="text/css" media="all" />
+
+</head>
+
+<body>
+    <div class="signinform">
+        <h1>验证码已发送至{{request.COOKIES.res_email}}</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>请输入您的验证码</h2>
+                    <form method="post">
+                        {% csrf_token%}
+                        <div class="input-group">
+                            <span><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+                            <input type="text" placeholder="请输入验证码" required="required" name="code">
+                        </div>
+
+                            <button class="btn btn-primary btn-block" type="submit">验证</button>
+
+                    </form>
+
+                    <button class="btn btn-primary btn-block" ><span id="span" class="a">重新发送60s</span></button>
+
+
+
+                             		 {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+                </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p>&copy; 2022 Service check form. All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p>
+        </div>
+        <!-- footer -->
+    </div>
+
+    <!-- fontawesome v5-->
+    <script src="{% static 'user_js/fontawesome.js'%}"></script>
+<script>
+	var time =60;
+	var box = window.setInterval(tt,1000)
+	function tt(){
+		time--;
+		document.getElementById('span').innerHTML = '重新发送'+time + 's';
+		if(time == 0){
+		window.clearInterval(box);//清除计时器
+		document.getElementById('span').innerHTML='<a href="/user/check/resend/">重新发送</a>';
+
+		}
+	}
+</script>
+
+</body>
+
+</html>

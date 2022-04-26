@@ -1,0 +1,75 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>找回密码</title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="{% static 'user_css/style.css'%}" type="text/css" media="all" />
+
+</head>
+
+<body>
+    <div class="signinform">
+        <h1>使用邮箱找回密码~</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>Find password</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <div class="input-group">
+                            <span><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                            <input type="email" placeholder="邮箱（xxxxxxx@xxx.com）" required="required" name="email" >
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">找回</button>
+                        </div>
+                    </form>
+                    		 {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+
+
+
+
+                    <p class="account">想起密码啦? <a href="/user/login/">返回登录</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p>&copy;  All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p>
+        </div>
+        <!-- footer -->
+    </div>
+
+    <!-- fontawesome v5-->
+    <script src="{% static 'user_js/fontawesome.js'%}"></script>
+
+</body>
+
+</html>
