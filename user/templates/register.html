@@ -1,0 +1,86 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>即将进入 FuHua大家庭</title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="{% static 'user_css/style.css'%}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'user_css/font-awesome.css'%}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'user_css/font-awesome.min.css'%}" type="text/css" media="all" />
+
+</head>
+
+<body>
+    <div class="signinform">
+        <h1>Register</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <h2>注册</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <span><i class="fas fa-user" aria-hidden="true"></i></span>
+                            <input type="text" placeholder="用户名（非中文）" required="required" name="username">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group">
+                            <span><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                            <input type="email" placeholder="邮箱（xxxxxxx@xxx.com）" required="required" name="email" >
+                        </div>
+                            <div class="input-group">
+                            <span><i class="fas fa-key" aria-hidden="true"></i></span>
+                            <input type="Password" placeholder="输入密码" required="required" name="password">
+                            </div>
+
+                            <span><i class="fas fa-key" aria-hidden="true"></i></span>
+                            <input type="Password" placeholder="再次输入密码" required="required" name="password2">
+
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">注册</button>
+                    </form>
+                             		 {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+                </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+        <!-- //container -->
+        <!-- footer -->
+        <div class="footer">
+            <p>&copy; 2022 Service register form. All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p>
+        </div>
+        <!-- footer -->
+    </div>
+
+    <!-- fontawesome v5-->
+    <script src="{% static 'user_js/fontawesome.js'%}"></script>
+
+</body>
+
+</html>
