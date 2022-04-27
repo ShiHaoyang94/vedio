@@ -14,7 +14,7 @@ Website: http://www.webthemez.com/
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>FuHua万能视频解析</title>
+    <title>FuHua视频</title>
     <!-- Bootstrap Styles-->
     <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -30,7 +30,7 @@ Website: http://www.webthemez.com/
 
 
 <style>
-    button{undefined
+    #a{undefined
 
 width:300px;
 
@@ -42,35 +42,46 @@ border-radius: 15%/25%;
 border:none
 
 }
+    #b{undefined
+
+width:100%;
+
+height: 100%;
+
+
+border:none;
+
+}
+#c{position: absolute;
+bottom:10%;
+left: 60%;
+
+}
+#e{undefined
+
+
+
+padding-bottom: 0px;
+
+}
 </style>
 </head>
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" >
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <a id= "e"class="navbar-brand" href="/index/0"><strong><i class="icon fa fa-plane"></i>FuHua视频</strong></a>
+
+                <button type="button"id="b" class="navbar-brand" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <i class="fa fa-bars icon">菜单</i>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong><i class="icon fa fa-plane"></i> FuHua视频解析</strong></a>
-				
-		<div id="sideNav" href="">
-		<i class="fa fa-bars icon"></i> 
-		</div>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
 
-                <!-- /.dropdown -->
-
-                <!-- /.dropdown -->
-
-                <!-- /.dropdown -->
-                <li class="dropdown">
+                <li class="dropdown" id="c">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i>
                         {% if request.session.username %}
@@ -107,63 +118,93 @@ border:none
                         <a class="active-menu" href="/index/0"><i class="fa fa-dashboard"></i> 主解析器</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> 更换线路<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i>更换线路<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/index/1">1</a>
+                                <a href="/index/1">纯净1</a>
                             </li>
                             <li>
-                                <a href="/index/2">2</a>
+                                <a href="/index/2">B站1</a>
                             </li>
                             <li>
-                                <a href="/index/3">3</a>
+                                <a href="/index/3">爱跟</a>
                             </li>
                             <li>
-                                <a href="/index/4">4</a>
+                                <a href="/index/4">爱豆</a>
                             </li>
                             <li>
-                                <a href="/index/5">5</a>
+                                <a href="/index/5">BL</a>
                             </li>
                             <li>
-                                <a href="#">6</a>
+                                <a href="/index/6">冰豆</a>
                             </li>
                             <li>
-                                <a href="#">7</a>
+                                <a href="/index/7">百域</a>
                             </li>
                             <li>
-                                <a href="#">8</a>
+                                <a href="/index/8">CK</a>
                             </li>
                             <li>
-                                <a href="#">9</a>
+                                <a href="/index/9">CHok</a>
                             </li>
                             <li>
-                                <a href="#">10</a>
+                                <a href="/index/10">ckmov</a>
                             </li>
                             <li>
-                                <a href="#">11</a>
+                                <a href="/index/11">大幕</a>
                             </li>
                             <li>
-                                <a href="#">12</a>
+                                <a href="/index/12">迪奥</a>
                             </li>
                             <li>
-                                <a href="#">13</a>
+                                <a href="/index/13">H8</a>
                             </li>
                             <li>
-                                <a href="#">14</a>
-                            </li>
-                            <li>
-                                <a href="#">15</a>
-                            </li>
-                            <li>
-                                <a href="#">9</a>
+                                <a href="/index/14">江湖</a>
                             </li>
 
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><i class="fa fa-sitemap"></i>支持的主流视频网站<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="https://movie.youku.com/">优酷</a>
+                            </li>
+                            <li>
+                                <a href="https://www.iqiyi.com">爱奇艺</a>
+                            </li>
+                            <li>
+                                <a href="https://v.qq.com/">腾讯视频</a>
+                            </li>
+                            <li>
+                                <a href="https://www.mgtv.com/">芒果视频</a>
+                            </li>
+                            <li>
+                                <a href="https://www.bilibili.com/">哔哩哔哩动画</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> 体育赛事直播<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/index/tiyu/1">人人体育（推荐选择原声直播）【免会员】</a>
+                            </li>
+                            <li>
+                                <a href="/index/tiyu/2">咪咕体育体育【正版】</a>
+                            </li>
+
+                        </ul>
+                    </li>
 
                     <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> 打赏团队</a>
+                    <li>
+                        <a href=""><i class="fa fa-fw fa-file"></i>使用说明</a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-fw fa-file"></i> 打赏团队</a>
                     </li>
                 </ul>
 
@@ -174,29 +215,30 @@ border:none
       
 		<div id="page-wrapper">
 		  <div class="header"> 
-                        <h1 class="page-header">
-                            欢迎使用FuHua视频 <small>如果视频卡顿请到左侧更改线路</small>
-                        </h1>
+                        <h2 class="page-header">
+                            欢迎使用FuHua视频 <small><a href="/index/0">如果视频卡顿请点击此处，并去菜单更改线路</a></small>
+                        </h2>
 
                             <form method="post">
                         {% csrf_token %}
                                 <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="请输入需要解析的网页          或             搜所您想看的电影、电视剧、综艺" style="width:1000px;display:inline;">
-                                    <button v-on="click:onSubmit"  style="display:inline"type="submit"><font color="white" size="3"> 解析 </font></button>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="请输入需要解析的网页或搜所您想看的电影" style="width:auto;display:inline;">
+                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 解析 </font></button>
                                 </div>
 
                             </form>
-<p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
-                    target="blank">ShiHaoyang</a></p>
+
 
 
 		</div>
             <br>
             <div >
 
-                <embed width='1200' height="650" src="{{request.COOKIES.last_web}}"/>
+                <embed width=100% height="650" src='{{request.COOKIES.last_web}}'/>
             </div>
             <!-- /. PAGE INNER  -->
+            <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p>
         </div>
         <!-- /. PAGE WRAPPER  -->
     </div>

@@ -7,5 +7,7 @@ urlpatterns = [
 
 
     path('',views.index),
-    path('<str:name>',views.indexs)
+    path('<str:name>',views.indexs),
+    path('tiyu/<str:name>/',views.tiyu),
+
 ]

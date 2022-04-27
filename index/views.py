@@ -75,7 +75,12 @@ def indexs(request,name):
 
         resq = HttpResponseRedirect('/index')
 
-        last_web=str(play_line_json[int(name)].get('url'))+request.COOKIES.get('web')
+        try:
+            request.COOKIES.get('web')
+            last_web = play_line_json[int(name)].get('url')+ request.COOKIES.get('web')
+        except Exception as e:
+            last_web = play_line_json[int(name)].get('url')
+
 
 
         resq.set_cookie('last_web', last_web, 60 * 60 * 2)
@@ -96,3 +101,26 @@ def indexs(request,name):
 
         resq.set_cookie('last_web', last_web, 60 * 60 * 2)
         return resq
+def tiyu(request,name):
+    if request.method == 'GET':
+        play_line_json = [
+            {"name": "人人体育", "url": "http://www.rrty36.com/home"},
+            {"name": "咪咕体育", "url": "https://www.miguvideo.com/mgs/website/prd/sportsHomePage.html?from=001"},
+            {"name": "直播8", "url": "http://www.youku.com/"}
+        ]
+
+        resq = HttpResponseRedirect('/index')
+
+
+
+        try:
+            request.COOKIES.get('web')
+            last_web = (play_line_json[int(name)-1].get('url')) + request.COOKIES.get('web')
+        except Exception as e:
+            last_web = (play_line_json[int(name) - 1].get('url'))
+        resq.set_cookie('last_web', last_web, 60 * 60 * 2)
+
+
+
+        return resq
+
