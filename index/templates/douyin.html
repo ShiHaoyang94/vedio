@@ -1,11 +1,11 @@
-﻿{% load staticfiles %}
+{% load staticfiles %}
 {% load tctip_tags %}
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: BRILLIANT Bootstrap Admin Template
 Version: 4.5.6
 Author: WebThemez
-Website: http://www.webthemez.com/ 
+Website: http://www.webthemez.com/
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -66,6 +66,7 @@ left: 60%;
 padding-bottom: 0px;
 
 }
+
 </style>
     {% load_tctip %}
 </head>
@@ -73,12 +74,16 @@ padding-bottom: 0px;
 <body>
 
     <div id="wrapper" >
+
         <nav class="navbar navbar-default top-navbar" role="navigation">
-              <a href="/index">
+
+
+                <a href="/index">
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
                 </a>
-            <div class="navbar-header">
 
+
+            <div class="navbar-header">
 
                 <button type="button"id="b" class="navbar-brand" data-toggle="collapse" data-target=".sidebar-collapse">
                     <i class="fa fa-bars icon">菜单</i>
@@ -114,6 +119,7 @@ padding-bottom: 0px;
                 </li>
                 <!-- /.dropdown -->
             </ul>
+
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -207,7 +213,7 @@ padding-bottom: 0px;
 
                     <li>
                     <li>
-                        <a href="/index/douyin/jiexi/"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
+                        <a href="/index/douyin/jiexi"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
                     </li>
                     <li>
                         <a href=""><i class="fa fa-fw fa-file"></i>使用说明</a>
@@ -221,31 +227,34 @@ padding-bottom: 0px;
 
         </nav>
         <!-- /. NAV SIDE  -->
-      
+
 		<div id="page-wrapper">
-		  <div class="header"> 
+		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua视频 <small><a href="/index">如果视频卡顿请点此处 再去菜单更改线路</a></small>
+                            欢迎使用FuHua视频<br> <small>抖音去水印功能</small>
                         </h2>
 
                             <form method="post">
                         {% csrf_token %}
                                 <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入网址或影片名" style="width:auto;display:inline;">
-                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 解析 </font></button>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入抖音链接" style="width:auto;display:inline;">
+                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 破解 </font></button>
                                 </div>
 
                             </form>
-              <div >
-
-                <embed width=100% height="650" src='{{request.COOKIES.last_web}}'/>
-            </div>
 
 
 
 		</div>
             <br>
+            <div >
+                <p>
+                    <a href="{{url}}"target="_blank" rel="noopener noreferrer"> 长按复制链接 </a>
 
+                </p>
+                 <embed width=100% height="650" src='{{url}}'/>
+
+            </div>
             <!-- /. PAGE INNER  -->
             <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
                     target="blank">ShiHaoyang</a></p>
@@ -261,23 +270,23 @@ padding-bottom: 0px;
     <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
     <!-- Bootstrap Js -->
     <script src="{% static '/js/bootstrap.min.js'%}"></script>
-	 
+
     <!-- Metis Menu Js -->
     <script src="{% static '/js/jquery.metisMenu.js'%}"></script>
     <!-- Morris Chart Js -->
     <script src="{% static '/js/morris/raphael-2.1.0.min.js'%}"></script>
     <script src="{% static '/js/morris/morris.js'%}"></script>
-	
-	
+
+
 	<script src="{% static '/js/easypiechart.js'%}"></script>
 	<script src="{% static '/js/easypiechart-data.js'%}"></script>
-	
+
 	 <script src="{% static '/js/Lightweight-Chart/jquery.chart.js'%}"></script>
-	
+
     <!-- Custom Js -->
     <script src="{% static '/js/custom-scripts.js'%}"></script>
 
-      
+
     <!-- Chart Js -->
     <script type="text/javascript" src="{% static '/js/Chart.min.js'%}"></script>
     <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>

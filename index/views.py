@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-
+import requests,re
 # Create your views here.
 def index(request):
     if request.method == 'GET':
@@ -10,8 +10,7 @@ def index(request):
     elif request.method == 'POST':
         resq = HttpResponseRedirect('/index')
 
-
-
+        resq.delete_cookie('web')
         get_web = request.POST['web']
 
         resq.set_cookie('web', get_web, 60 * 60 * 2)
@@ -75,10 +74,13 @@ def indexs(request,name):
 
         resq = HttpResponseRedirect('/index')
 
+        resq.delete_cookie('last_web')
+
         try:
             request.COOKIES.get('web')
             last_web = play_line_json[int(name)].get('url')+ request.COOKIES.get('web')
         except Exception as e:
+
             last_web = play_line_json[int(name)].get('url')
 
 
@@ -93,6 +95,7 @@ def indexs(request,name):
         resq = HttpResponseRedirect('/index')
 
         resq.delete_cookie('last_web')
+
 
         get_web = request.POST['web']
         moren_web = "https://z1.m1907.cn/?jx="
@@ -114,6 +117,8 @@ def tiyu(request,name):
 
 
         try:
+
+            resq.delete_cookie('last_web')
             request.COOKIES.get('web')
             last_web = (play_line_json[int(name)-1].get('url')) + request.COOKIES.get('web')
         except Exception as e:
@@ -124,3 +129,33 @@ def tiyu(request,name):
 
         return resq
 
+def douyin(request):
+    if request.method == 'GET':
+
+        return render(request, 'douyin.html')
+
+    elif request.method == 'POST':
+
+        try:
+
+            get_url = request.POST['web']
+            urls = re.findall(r'https://v.douyin.com/[A-Za-z]*/', get_url)
+            share_url = urls[0]
+
+            headers = {
+            'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Mobile Safari/537.36'
+            }
+            response = requests.get(share_url, headers=headers)
+            url = response.url  # 处理页面重定向，提取新连接
+            id = re.search(r'/video/(.*?)/', url).group(1)  # 获取视频id
+
+            # 提取带水印的视频链接地址
+            url = 'https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=' + id
+            response = requests.get(url, headers=headers)
+            json = response.json()
+
+            download_url = json['item_list'][0]['video']['play_addr']['url_list'][0].replace('wm', '')
+
+            return render(request,'douyin.html',{'url':download_url})
+        except Exception as e:
+            return HttpResponseRedirect('/busy')
