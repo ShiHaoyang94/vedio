@@ -1,3 +1,4 @@
+
 {% load staticfiles %}
 {% load tctip_tags %}
 <!DOCTYPE html>
@@ -17,12 +18,16 @@ Website: http://www.webthemez.com/
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
     <title>FuHua视频</title>
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap Styles-->
     <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href="{% static '/css/font-awesome.css'%}" rel="stylesheet" />
     <!-- Morris Chart Styles-->
     <link href="{% static '/js/morris/morris-0.4.3.min.css'%}" rel="stylesheet" />
+
     <!-- Custom Styles-->
     <link href="{% static '/css/custom-styles.css'%}" rel="stylesheet" />
     <!-- Google Fonts-->
@@ -32,7 +37,45 @@ Website: http://www.webthemez.com/
 
 
 <style>
-    #a{undefined
+/* 小屏幕手机端 */
+	@media (min-width: 0px) and (max-width:768px) {
+	.box{
+           float: left;
+           width: 100%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:auto;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+
+	}
+
+
+
+	/* 大屏幕（大于等于 1200px） */
+	@media (min-width: 768px) {
+	.box{
+           float: left;
+           width: 32%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:600px;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+	}
+.container::after{
+           content: "";
+           display: block;
+           clear: both;
+       }
+
+#a{undefined
 
 width:300px;
 
@@ -66,7 +109,18 @@ left: 60%;
 padding-bottom: 0px;
 
 }
+#az{undefined
 
+width:600px;
+
+height: 30px;
+
+background-color: #00aeec;
+
+border-radius: 15%/25%;
+border:none
+
+}
 </style>
     {% load_tctip %}
 </head>
@@ -74,16 +128,12 @@ padding-bottom: 0px;
 <body>
 
     <div id="wrapper" >
-
         <nav class="navbar navbar-default top-navbar" role="navigation">
-
-
-                <a href="/index">
+              <a href="/index">
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
                 </a>
-
-
             <div class="navbar-header">
+
 
                 <button type="button"id="b" class="navbar-brand" data-toggle="collapse" data-target=".sidebar-collapse">
                     <i class="fa fa-bars icon">菜单</i>
@@ -119,7 +169,6 @@ padding-bottom: 0px;
                 </li>
                 <!-- /.dropdown -->
             </ul>
-
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -219,7 +268,7 @@ padding-bottom: 0px;
 
                     <li>
                     <li>
-                        <a href="/index/douyin/jiexi"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
+                        <a href="/index/douyin/jiexi/"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
                     </li>
 
                 </ul>
@@ -232,43 +281,75 @@ padding-bottom: 0px;
 		<div id="page-wrapper">
 		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua视频<br> <small>抖音去水印功能</small>
+                            欢迎使用FuHua视频 <small><a href="/movies/show/">点击返回FuHua影视网搜索引擎</a></small>
                         </h2>
 
-                            <form method="post">
-                        {% csrf_token %}
-                                <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入抖音链接" style="width:auto;display:inline;">
-                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 破解 </font></button>
-                                </div>
 
-                            </form>
+              <div >
+
+
+<br>
+
+
+        <div >
+            <div >
+                {% for p in json%}
+
+                <div class="box">
+                    <div style=" text-align:center;margin:0 auto;">
+                        <a href="/movies/about{{p.url}}"><img referrerpolicy="no-referrer" src="{{p.cover}}"  style="width:300px;"></a>
+
+                        <div >
+
+                            <h4>{{p.title}}</h4>
+                            <div >{{p.daoyan}}</div>
+                            <div >{{p.actor}}</div>
+                            <div ><a>{{p.smsg}}</a></div>
+                        </div>
+                    </div>
+
+        </div>
+                {% endfor%}
+
+
+
+    </div>
+            </div>
 
 
 
 		</div>
             <br>
-            <div >
-                <p>
-                    <a href="{{url}}"target="_blank" rel="noopener noreferrer"> 长按复制链接 </a>
 
-                </p>
-                 <embed width=100% height="650" src='{{url}}'/>
+            <!-- /. PAGE INNER  -->
+
+        </div>
+
+
+
+        <!-- /. PAGE WRAPPER  -->
+<div style="text-align:center;">
+    <br>
+        <br>
+
+                 <div >
+                    <button id="az" onclick="window.location.href='/movies/search/{{page}}/'"><font color="white" size="3" > 下一页 </font></button>
+                </div>
+                <br>
+            <br>
+            <br>
+            <br>
+    <div><p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
+                    target="blank">ShiHaoyang</a></p></div>
 
             </div>
-            <!-- /. PAGE INNER  -->
-            <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
-                    target="blank">ShiHaoyang</a></p>
-        </div>
-        <!-- /. PAGE WRAPPER  -->
+
     </div>
+</div>
 
 
 
-    <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
+    <!-- /. WRAPPER  --> <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
     <!-- Bootstrap Js -->
     <script src="{% static '/js/bootstrap.min.js'%}"></script>
 
@@ -290,7 +371,9 @@ padding-bottom: 0px;
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{% static '/js/Chart.min.js'%}"></script>
-    <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>
+    <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>v
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
 
 </body>
 

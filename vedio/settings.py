@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'user',
     'index',
     'django_tctip',
+    'movies',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'middleware.middleware.SimpleMiddleware',
+    #'middleware.middleware.SimpleMiddleware',
     # 'middleware.middleware.IpMiddleware'
     #'middleware.middleware.ExceptionMW'
 

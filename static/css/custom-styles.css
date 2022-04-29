@@ -62,7 +62,8 @@ p {
     padding-top:20px;
 }
 .navbar-side {
-    z-index: 0; 
+    z-index: 0;
+
 }
 .panel{
 border-radius:0px;
@@ -539,9 +540,12 @@ padding-top: 4px;
 ul.nav.nav-second-level.collapse.in {background: #131212;}
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
-	 outline:0;
-	 background: #575757;
-	 color: #F36A5A;
+	 
+outline:0;
+	 
+background: #575757;
+	 
+color: #F36A5A;
 }
  
 .navbar-side {

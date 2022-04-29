@@ -109,7 +109,7 @@ def tiyu(request,name):
         play_line_json = [
             {"name": "人人体育", "url": "http://www.rrty36.com/home"},
             {"name": "咪咕体育", "url": "https://www.miguvideo.com/mgs/website/prd/sportsHomePage.html?from=001"},
-            {"name": "直播8", "url": "http://www.youku.com/"}
+
         ]
 
         resq = HttpResponseRedirect('/index')

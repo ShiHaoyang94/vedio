@@ -20,11 +20,13 @@ from django.urls import path, include
 import index.views
 from index import views as index_views
 from vedio import view
+from movies import views
 from user import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('user.urls')),
     path('index/',include('index.urls')),
     path('',view.login),
-    path('busy/',user_views.busy)
+    path('busy/',user_views.busy),
+    path('movies/',include('movies.urls')),
 ]

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+﻿{% load staticfiles %}
 {% load tctip_tags %}
 <!DOCTYPE html>
 <!--
@@ -66,7 +66,6 @@ left: 60%;
 padding-bottom: 0px;
 
 }
-
 </style>
     {% load_tctip %}
 </head>
@@ -74,16 +73,12 @@ padding-bottom: 0px;
 <body>
 
     <div id="wrapper" >
-
         <nav class="navbar navbar-default top-navbar" role="navigation">
-
-
-                <a href="/index">
+              <a href="/index">
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
                 </a>
-
-
             <div class="navbar-header">
+
 
                 <button type="button"id="b" class="navbar-brand" data-toggle="collapse" data-target=".sidebar-collapse">
                     <i class="fa fa-bars icon">菜单</i>
@@ -119,7 +114,6 @@ padding-bottom: 0px;
                 </li>
                 <!-- /.dropdown -->
             </ul>
-
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -219,7 +213,7 @@ padding-bottom: 0px;
 
                     <li>
                     <li>
-                        <a href="/index/douyin/jiexi"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
+                        <a href="/index/douyin/jiexi/"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
                     </li>
 
                 </ul>
@@ -232,30 +226,27 @@ padding-bottom: 0px;
 		<div id="page-wrapper">
 		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua视频<br> <small>抖音去水印功能</small>
+                            FuHua视频 <small>欢迎使用FuHua影视网搜索引擎</a></small>
                         </h2>
 
                             <form method="post">
                         {% csrf_token %}
                                 <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入抖音链接" style="width:auto;display:inline;">
-                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 破解 </font></button>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="name" placeholder="输入影片名或演员" style="width:auto;display:inline;">
+                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 搜索 </font></button>
                                 </div>
 
                             </form>
+              <div >
+
+
+            </div>
 
 
 
 		</div>
             <br>
-            <div >
-                <p>
-                    <a href="{{url}}"target="_blank" rel="noopener noreferrer"> 长按复制链接 </a>
 
-                </p>
-                 <embed width=100% height="650" src='{{url}}'/>
-
-            </div>
             <!-- /. PAGE INNER  -->
             <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
                     target="blank">ShiHaoyang</a></p>
