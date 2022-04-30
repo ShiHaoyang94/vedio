@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rr83xcuh1)is*ok4^ai2dxgudcg!u1k!wvg^ush+-zg4_k=y%u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.0.101']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,13 +47,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'middleware.middleware.SimpleMiddleware',
+    'middleware.middleware.SimpleMiddleware',
     # 'middleware.middleware.IpMiddleware'
-    #'middleware.middleware.ExceptionMW'
+    'middleware.middleware.ExceptionMW'
 
 ]
 
@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'vedio',
         'USER':'root',
         'PASSWORD':'123456',
-        'HOST':'127.0.0.1',
+        'HOST':'localhost',
         'PORT':'3306',
     }
 }
@@ -145,6 +145,6 @@ EMAL_POST = 25
 # 发送邮件的邮箱
 EMAIL_HOST_USER = '352446506@qq.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'dtfvraluuolybigj'
+EMAIL_HOST_PASSWORD = 'ktnbdvqhrvwecafd'
 # 收件人看到的发件人<此处要和发送邮件的邮箱相同>
 EX_EMAIL = ['352446506@qq.com']

@@ -1,4 +1,4 @@
-﻿{% load staticfiles %}
+﻿{% load static %}
 {% load tctip_tags %}
 <!DOCTYPE html>
 <!--
@@ -74,9 +74,9 @@ padding-bottom: 0px;
 
     <div id="wrapper" >
         <nav class="navbar navbar-default top-navbar" role="navigation">
-              <a href="/index">
+
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
-                </a>
+
             <div class="navbar-header">
 
 
@@ -230,7 +230,8 @@ padding-bottom: 0px;
                         </h2>
 
                             <form method="post">
-                        {% csrf_token %}
+                                {% csrf_token %}
+
                                 <div>
                                     <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="name" placeholder="输入影片名或演员" style="width:auto;display:inline;">
                                     <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 搜索 </font></button>

@@ -1,11 +1,11 @@
-﻿{% load staticfiles %}
+﻿{% load static %}
 {% load tctip_tags %}
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: BRILLIANT Bootstrap Admin Template
 Version: 4.5.6
 Author: WebThemez
-Website: http://www.webthemez.com/ 
+Website: http://www.webthemez.com/
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -74,9 +74,9 @@ padding-bottom: 0px;
 
     <div id="wrapper" >
         <nav class="navbar navbar-default top-navbar" role="navigation">
-              <a href="/index">
+
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
-                </a>
+
             <div class="navbar-header">
 
 
@@ -225,9 +225,9 @@ padding-bottom: 0px;
 
         </nav>
         <!-- /. NAV SIDE  -->
-      
+
 		<div id="page-wrapper">
-		  <div class="header"> 
+		  <div class="header">
                         <h2 class="page-header">
                             欢迎使用FuHua视频 <small><a href="/index">如果视频卡顿请点此处 再去菜单更改线路</a></small>
                         </h2>
@@ -235,11 +235,18 @@ padding-bottom: 0px;
                             <form method="post">
                         {% csrf_token %}
                                 <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入网址或影片名" style="width:auto;display:inline;">
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="web" placeholder="输入视频链接地址" style="width:auto;display:inline;">
                                     <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 解析 </font></button>
                                 </div>
 
                             </form>
+                                           		 {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
               <div >
 
                 <embed width=100% height="650" src='{{request.COOKIES.last_web}}'/>

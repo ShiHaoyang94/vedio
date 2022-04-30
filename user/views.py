@@ -14,14 +14,14 @@ def login(request):
     if request.method == 'GET':
         if request.session.get('username') :
 
-            return HttpResponseRedirect('/index')
+            return HttpResponseRedirect('/movies/search/1')
 
 
         elif request.COOKIES.get('username'):
 
             request.session['username'] = request.COOKIES.get('username')
 
-            return HttpResponseRedirect('/index')
+            return HttpResponseRedirect('/movies/search/1')
         else:
             return render(request, 'login.html')
 
@@ -59,7 +59,7 @@ def login(request):
                 if 'remenber'in request.POST:
 
 
-                    resq = HttpResponseRedirect('/index')
+                    resq = HttpResponseRedirect('/movies/search/1')
                     resq.set_cookie('username',login_username,60*60*24*3)
                     # resq.set_cookie('uid',User.id)
 
@@ -69,7 +69,7 @@ def login(request):
 
                 else:
 
-                    return HttpResponseRedirect('/index')
+                    return HttpResponseRedirect('/movies/search/1')
 
             else:
 
@@ -122,18 +122,18 @@ def register(request):
                     register_password_m = m.hexdigest()
 
                     my_sender = '352446506@qq.com'
-                    my_pass = 'dtfvraluuolybigj'
+                    my_pass = 'ktnbdvqhrvwecafd'
                     my_user = register_email
                     import random
                     code = random.randint(1000, 9999)
 
                     msg = MIMEText(
-                        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用本系统<br />本次验证码为:' + str(
+                        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用FuHua影视<br />您的邮箱验证码为:' + str(
                             code) + '</strong></h1><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpicnew8.photophoto.cn%2F20140511%2Fheisebeijing-shuzhixiaoniao-heisewenlubeijing-02084221_1.jpg&refer=http%3A%2F%2Fpicnew8.photophoto.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644811756&t=abc196077281a644bddce5e2eac8dbf2" ></div></body></html>',
                         'html', 'utf-8')
-                    msg['From'] = formataddr(['ShiHaoyang.top', my_sender])
+                    msg['From'] = formataddr(['www.shihaoyang.top', my_sender])
                     msg['To'] = formataddr(['FK', my_user])
-                    msg['Subject'] = '用户注册系统'
+                    msg['Subject'] = 'FuHua影视'
                     server = smtplib.SMTP_SSL('smtp.qq.com', 465)
                     server.login(my_sender, my_pass)
                     server.sendmail(my_sender, [my_user], msg.as_string())
@@ -176,8 +176,13 @@ def check(request):
 
             User.objects.create(username=request.COOKIES.get('res_username'),email=request.COOKIES.get('res_email'),password=request.COOKIES.get('res_password'))
 
+            res = HttpResponseRedirect('/user/login')
+            res.delete_cookie('res_username')
+            res.delete_cookie('res_email')
+            res.delete_cookie('res_password')
+            res.delete_cookie('res_code')
 
-            return HttpResponseRedirect('/user/login')
+            return res
         else:
             messages.error(request, "验证码输入错误")
             return HttpResponseRedirect('/user/check')
@@ -201,18 +206,18 @@ def re(request):
 
 
     my_sender = '352446506@qq.com'
-    my_pass = 'dtfvraluuolybigj'
+    my_pass = 'ktnbdvqhrvwecafd'
     my_user = request.COOKIES.get('res_email')
     import random
     code = random.randint(1000, 9999)
 
     msg = MIMEText(
-        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用本系统<br />本次验证码为:' + str(
+        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用FuHua影视<br />您的邮箱验证码为:' + str(
             code) + '</strong></h1><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpicnew8.photophoto.cn%2F20140511%2Fheisebeijing-shuzhixiaoniao-heisewenlubeijing-02084221_1.jpg&refer=http%3A%2F%2Fpicnew8.photophoto.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644811756&t=abc196077281a644bddce5e2eac8dbf2" ></div></body></html>',
         'html', 'utf-8')
-    msg['From'] = formataddr(['ShiHaoyang.top', my_sender])
+    msg['From'] = formataddr(['www.shihaoyang.top', my_sender])
     msg['To'] = formataddr(['FK', my_user])
-    msg['Subject'] = '用户注册系统'
+    msg['Subject'] = 'FuHua影视'
     server = smtplib.SMTP_SSL('smtp.qq.com', 465)
     server.login(my_sender, my_pass)
     server.sendmail(my_sender, [my_user], msg.as_string())
@@ -252,18 +257,18 @@ def forget(request):
             resq.set_cookie(key='res_email', value=email, max_age=None, expires=None)
             resq.set_cookie(key='username',value=user.username,max_age=None, expires=None)
             my_sender = '352446506@qq.com'
-            my_pass = 'dtfvraluuolybigj'
+            my_pass = 'ktnbdvqhrvwecafd'
             my_user = email
             import random
             code = random.randint(1000, 9999)
 
             msg = MIMEText(
-                '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用本系统<br />本次验证码为:' + str(
+                '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用FuHua影视<br />您的邮箱验证码为:' + str(
                     code) + '</strong></h1><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpicnew8.photophoto.cn%2F20140511%2Fheisebeijing-shuzhixiaoniao-heisewenlubeijing-02084221_1.jpg&refer=http%3A%2F%2Fpicnew8.photophoto.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644811756&t=abc196077281a644bddce5e2eac8dbf2" ></div></body></html>',
                 'html', 'utf-8')
-            msg['From'] = formataddr(['ShiHaoyang.top', my_sender])
+            msg['From'] = formataddr(['www.shihaoyang.top', my_sender])
             msg['To'] = formataddr(['FK', my_user])
-            msg['Subject'] = '用户注册系统'
+            msg['Subject'] = 'FuHua影视'
             server = smtplib.SMTP_SSL('smtp.qq.com', 465)
             server.login(my_sender, my_pass)
             server.sendmail(my_sender, [my_user], msg.as_string())
@@ -313,12 +318,13 @@ def new(request):
             user.password = password_m
 
             user.save()
-            resq = HttpResponseRedirect('/user/forget')
+            resq = HttpResponseRedirect('/user/login')
             resq.delete_cookie('res_code')
             resq.delete_cookie('res_email')
+            resq.delete_cookie('username')
             # del request.session['res_code']
             # del request.session['res_email']
-            return HttpResponseRedirect('/user/login')
+            return resq
 
         else:
             messages.error(request, "两次密码输入不一致")
@@ -333,18 +339,18 @@ def res(request):
 
 
     my_sender = '352446506@qq.com'
-    my_pass = 'dtfvraluuolybigj'
+    my_pass = 'ktnbdvqhrvwecafd'
     my_user = request.COOKIES.get('res_email')
     import random
     code = random.randint(1000, 9999)
 
     msg = MIMEText(
-        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用本系统<br />本次验证码为:' + str(
+        '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的用户您好!<br><br>欢迎使用FuHua影视<br />您的邮箱验证码为:' + str(
             code) + '</strong></h1><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpicnew8.photophoto.cn%2F20140511%2Fheisebeijing-shuzhixiaoniao-heisewenlubeijing-02084221_1.jpg&refer=http%3A%2F%2Fpicnew8.photophoto.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644811756&t=abc196077281a644bddce5e2eac8dbf2" ></div></body></html>',
         'html', 'utf-8')
-    msg['From'] = formataddr(['ShiHaoyang.top', my_sender])
+    msg['From'] = formataddr(['www.shihaoyang.top', my_sender])
     msg['To'] = formataddr(['FK', my_user])
-    msg['Subject'] = '用户注册系统'
+    msg['Subject'] = 'FuHua影视'
     server = smtplib.SMTP_SSL('smtp.qq.com', 465)
     server.login(my_sender, my_pass)
     server.sendmail(my_sender, [my_user], msg.as_string())

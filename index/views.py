@@ -1,6 +1,9 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-import requests,re
+import requests, re
+from django.contrib import messages
+
+
 # Create your views here.
 def index(request):
     if request.method == 'GET':
@@ -12,17 +15,25 @@ def index(request):
 
         resq.delete_cookie('web')
         get_web = request.POST['web']
+        if re.match("^http", get_web):
 
-        resq.set_cookie('web', get_web, 60 * 60 * 2)
+            resq.set_cookie('web', get_web, 60 * 60 * 2)
 
-        moren_web="https://z1.m1907.cn/?jx="
+            moren_web = "https://z1.m1907.cn/?jx="
 
-        last_web= moren_web+get_web
+            last_web = moren_web + get_web
 
-        resq.set_cookie('last_web',last_web, 60 * 60 * 2 )
-        return resq
+            resq.set_cookie('last_web', last_web, 60 * 60 * 2)
 
-def indexs(request,name):
+            return resq
+        else:
+
+            messages.error(request, "解析网址格式错误,请重新输入")
+
+            return HttpResponseRedirect('/index')
+
+
+def indexs(request, name):
     if request.method == 'GET':
         play_line_json = [
             {"name": "纯净1", "url": "https://z1.m1907.cn/?jx=", "t": "m"},
@@ -71,23 +82,18 @@ def indexs(request,name):
             {"name": "8090", "url": "https://www.8090g.cn/?url="}
         ]
 
-
         resq = HttpResponseRedirect('/index')
 
         resq.delete_cookie('last_web')
 
         try:
             request.COOKIES.get('web')
-            last_web = play_line_json[int(name)].get('url')+ request.COOKIES.get('web')
+            last_web = play_line_json[int(name)].get('url') + request.COOKIES.get('web')
         except Exception as e:
 
             last_web = play_line_json[int(name)].get('url')
 
-
-
         resq.set_cookie('last_web', last_web, 60 * 60 * 2)
-
-
 
         return resq
 
@@ -96,7 +102,6 @@ def indexs(request,name):
 
         resq.delete_cookie('last_web')
 
-
         get_web = request.POST['web']
         moren_web = "https://z1.m1907.cn/?jx="
 
@@ -104,7 +109,9 @@ def indexs(request,name):
 
         resq.set_cookie('last_web', last_web, 60 * 60 * 2)
         return resq
-def tiyu(request,name):
+
+
+def tiyu(request, name):
     if request.method == 'GET':
         play_line_json = [
             {"name": "人人体育", "url": "http://www.rrty36.com/home"},
@@ -114,20 +121,17 @@ def tiyu(request,name):
 
         resq = HttpResponseRedirect('/index')
 
-
-
         try:
 
             resq.delete_cookie('last_web')
             request.COOKIES.get('web')
-            last_web = (play_line_json[int(name)-1].get('url')) + request.COOKIES.get('web')
+            last_web = (play_line_json[int(name) - 1].get('url')) + request.COOKIES.get('web')
         except Exception as e:
             last_web = (play_line_json[int(name) - 1].get('url'))
         resq.set_cookie('last_web', last_web, 60 * 60 * 2)
 
-
-
         return resq
+
 
 def douyin(request):
     if request.method == 'GET':
@@ -139,11 +143,11 @@ def douyin(request):
         try:
 
             get_url = request.POST['web']
-            urls = re.findall(r'https://v.douyin.com/[A-Za-z]*/', get_url)
+            urls = re.findall(r'https://v.douyin.com/[A-Za-z0-9]*/', get_url)
             share_url = urls[0]
 
             headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Mobile Safari/537.36'
+                'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Mobile Safari/537.36'
             }
             response = requests.get(share_url, headers=headers)
             url = response.url  # 处理页面重定向，提取新连接
@@ -156,6 +160,6 @@ def douyin(request):
 
             download_url = json['item_list'][0]['video']['play_addr']['url_list'][0].replace('wm', '')
 
-            return render(request,'douyin.html',{'url':download_url})
+            return render(request, 'douyin.html', {'url': download_url})
         except Exception as e:
             return HttpResponseRedirect('/busy')
