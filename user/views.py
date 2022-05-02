@@ -90,6 +90,12 @@ def register(request):
         register_email = request.POST['email']
         register_password = request.POST['password']
         register_password2 = request.POST['password2']
+
+        if register_username.isspace() or register_password.isspace():
+            messages.error(request, "用户名或者密码不能为空，请重新注册")
+
+            return HttpResponseRedirect('/user/register')
+
         if register_email.find("@") == -1 or not register_email.endswith('.com'):
             messages.error(request, "邮箱格式错误，请重新注册")
 
@@ -306,6 +312,10 @@ def new(request):
     elif request.method == 'POST':
         password = request.POST['password']
         re_password = request.POST['password2']
+        if password.isspace():
+            messages.error(request, "密码不能为空，请重新修改")
+
+            return HttpResponseRedirect('/user/forget/new')
         if password == re_password:
             m = hashlib.md5()
 
@@ -362,3 +372,28 @@ def res(request):
     code_m = m.hexdigest()
     resq.set_cookie(key='res_code', value=code_m, max_age=None, expires=None)
     return resq
+def qunfa(request):
+    if request.method == 'GET':
+        return render(request, 'qunfa.html')
+    elif request.method == 'POST':
+        my_sender = '352446506@qq.com'
+        my_pass = 'ktnbdvqhrvwecafd'
+        word = request.POST['wenzi']
+        users = User.objects.all()
+        for user in users:
+            my_user = user.email
+            msg = MIMEText(
+                '<html><head></head><body><div style="background-color:#262827;"><br><br><br><hr size="5" noshade="noshade" style="border:5px #cccccc dotted;"><h1 style="color: aliceblue;"><strong>尊敬的'+str(user.username)+'您好!<br><br>欢迎使用FuHua影视<br />本次新版本更新内容:' + str(
+                    word) + '</strong></h1><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpicnew8.photophoto.cn%2F20140511%2Fheisebeijing-shuzhixiaoniao-heisewenlubeijing-02084221_1.jpg&refer=http%3A%2F%2Fpicnew8.photophoto.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644811756&t=abc196077281a644bddce5e2eac8dbf2" ></div></body></html>',
+                'html', 'utf-8')
+            msg['From'] = formataddr(['www.shihaoyang.top', my_sender])
+            msg['To'] = formataddr(['FK', my_user])
+            msg['Subject'] = 'FuHua影视'
+            server = smtplib.SMTP_SSL('smtp.qq.com', 465)
+            server.login(my_sender, my_pass)
+            server.sendmail(my_sender, [my_user], msg.as_string())
+            server.quit()
+        return HttpResponse("群发成功")
+
+
+

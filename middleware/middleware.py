@@ -18,6 +18,8 @@ class SimpleMiddleware(MiddlewareMixin):
 
         if re.match("^/admin/", request.path):
             return None
+        elif request.path == '/user/qunfa/':
+            return None
         elif request.path == '/busy/':
 
             return None

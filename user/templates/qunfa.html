@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员群发</title>
+</head>
+<body>
+ <form method="post">
+                                {% csrf_token %}
+
+                                <div>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="wenzi" placeholder="输入群发内容" style="width:auto;display:inline;">
+                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 群发 </font></button>
+                                </div>
+
+                            </form>
+</body>
+</html>

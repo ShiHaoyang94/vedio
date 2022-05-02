@@ -163,3 +163,13 @@ def douyin(request):
             return render(request, 'douyin.html', {'url': download_url})
         except Exception as e:
             return HttpResponseRedirect('/busy')
+
+def elsfk(request):
+    if request.method == 'GET':
+
+        return render(request, 'elsfk.html')
+
+def xbw(request):
+    if request.method == 'GET':
+
+        return render(request, 'xbw.html')
