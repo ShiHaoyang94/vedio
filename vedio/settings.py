@@ -148,3 +148,6 @@ EMAIL_HOST_USER = '352446506@qq.com'
 EMAIL_HOST_PASSWORD = 'ktnbdvqhrvwecafd'
 # 收件人看到的发件人<此处要和发送邮件的邮箱相同>
 EX_EMAIL = ['352446506@qq.com']
+
+MEDIA_URL='/media/'
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')

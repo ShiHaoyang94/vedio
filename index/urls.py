@@ -12,6 +12,9 @@ urlpatterns = [
     path('douyin/jiexi/',views.douyin),
     path('elsfk/',views.elsfk),
     path('xbw/',views.xbw),
+    path('words/',views.words),
+    path('laji/',views.laji),
+    path('main/',views.main),
 
 
 ]

@@ -16,7 +16,7 @@ Website: http://www.webthemez.com/
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>FuHua游戏|俄罗斯方块</title>
+    <title>FuHua科技|垃圾分类信息查询</title>
     <!-- Bootstrap Styles-->
     <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -32,6 +32,7 @@ Website: http://www.webthemez.com/
 
 
 <style>
+
     #a{undefined
 
 width:300px;
@@ -129,13 +130,11 @@ padding-bottom: 0px;
                         <a href=""><i class="fa fa-dashboard"></i>欢迎来到FuHua</a>
                     </li>
                     <li>
-                        <a href="/index/main/"><i class="fa fa-dashboard"></i>FuHua主页</a>
-                    </li>
-                    <li>
                         <a href="/movies/search/1"><i class="fa fa-dashboard"></i> FuHua影视</a>
                     </li>
                     <li>
                         <a href="/index/0"><i class="fa fa-sitemap"></i> FuHua视频网站链接解析<span class="fa arrow"></span></a>
+
                         <ul class="nav nav-second-level">
                             <li>
                         <a href="/index/0"><i class="fa fa-dashboard"></i>解析主页</a>
@@ -242,13 +241,13 @@ padding-bottom: 0px;
 
 
                     <li>
-                        <a href="/index/douyin/jiexi"><i class="fa fa-fw fa-file"></i>FuHua抖音视频去水印下载功能</a>
+                        <a href="/index/douyin/jiexi"><i class="fa fa-fw fa-file"></i>抖音视频去水印下载</a>
                     </li>
                     <li>
-                        <a href="/index/words/"><i class="fa fa-fw fa-file"></i>FuHua图片识别文字功能</a>
+                        <a href="/index/words/"><i class="fa fa-fw fa-file"></i>图片识别文字功能</a>
                     </li>
                     <li>
-                        <a href="/index/laji/"><i class="fa fa-fw fa-file"></i>FuHua垃圾分类查询功能</a>
+                        <a href="/index/laji/"><i class="fa fa-fw fa-file"></i>垃圾分类查询功能</a>
                     </li>
 
 
@@ -263,19 +262,30 @@ padding-bottom: 0px;
 		<div id="page-wrapper">
 		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua视频<br> <small>俄罗斯方块小游戏</small>
+                            欢迎使用FuHua<br> <small>垃圾分类查询功能</small>
                         </h2>
 
+                            <form method="post" target="_self">
+                        {% csrf_token %}
+                                <div>
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="names" placeholder="输入需要查询的物品" style="width:auto;display:inline;">
+                                    <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 查询 </font></button>
+                                </div>
 
+                            </form>
 
 
 
 		</div>
             <br>
             <div >
-
-                 <embed width=100% height="650" src='https://wxurl.cn/U0T'/>
-
+                    <h2>{{jsons.aim.goodsName}}  :  {{jsons.aim.goodsType}}</h2>
+                <br>
+                  {% for p in jsons.recommendList%}
+                            <h3>{{p.goodsName}}  :  {{p.goodsType}}</h3>
+                {% endfor%}
+                <br>
+                    (*若为空，请重新检查关键词是否有误)
             </div>
             <!-- /. PAGE INNER  -->
             <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""

@@ -24,8 +24,7 @@ class SimpleMiddleware(MiddlewareMixin):
 
             return None
         elif request.COOKIES.get('res_code'):
-            if request.path != '/user/login/' and request.path != '/user/register/' and not re.match("^/user/check/",
-                                                                                                     request.path) and not re.match(
+            if request.path != '/user/login/' and request.path != '/user/register/' and not re.match("^/user/check/",request.path) and not re.match(
                     "^/user/forget/", request.path):
                 return HttpResponseRedirect('/user/login/')
 
@@ -38,11 +37,11 @@ class SimpleMiddleware(MiddlewareMixin):
                     if not re.match("^/index/", request.path) and request.path != '/user/exit/' and not re.match(
                             "^/movies/", request.path):
 
-                        return HttpResponseRedirect('/movies/search/1/')
+                        return HttpResponseRedirect('/index/main/')
                     elif re.match("^/movies/", request.path):
                         return None
                 else:
-                    return HttpResponseRedirect('/movies/search/1/')
+                    return HttpResponseRedirect('/index/main/')
             elif request.path == '/user/register/':
                 return None
             elif request.path == '/user/forget/':

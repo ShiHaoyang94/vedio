@@ -1,3 +1,4 @@
+
 {% load static %}
 {% load tctip_tags %}
 <!DOCTYPE html>
@@ -16,13 +17,17 @@ Website: http://www.webthemez.com/
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta content="" name="description" />
     <meta content="webthemez" name="author" />
-    <title>FuHua游戏|俄罗斯方块</title>
+    <title>FuHua科技|图片识别文字</title>
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap Styles-->
     <link href="{% static '/css/bootstrap.css'%}" rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href="{% static '/css/font-awesome.css'%}" rel="stylesheet" />
     <!-- Morris Chart Styles-->
     <link href="{% static '/js/morris/morris-0.4.3.min.css'%}" rel="stylesheet" />
+
     <!-- Custom Styles-->
     <link href="{% static '/css/custom-styles.css'%}" rel="stylesheet" />
     <!-- Google Fonts-->
@@ -32,7 +37,45 @@ Website: http://www.webthemez.com/
 
 
 <style>
-    #a{undefined
+/* 小屏幕手机端 */
+	@media (min-width: 0px) and (max-width:768px) {
+	.box{
+           float: left;
+           width: 100%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:auto;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+
+	}
+
+
+
+	/* 大屏幕（大于等于 1200px） */
+	@media (min-width: 768px) {
+	.box{
+           float: left;
+           width: 32%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:600px;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+	}
+.container::after{
+           content: "";
+           display: block;
+           clear: both;
+       }
+
+#a{undefined
 
 width:300px;
 
@@ -66,7 +109,18 @@ left: 60%;
 padding-bottom: 0px;
 
 }
+#az{undefined
 
+width:600px;
+
+height: 30px;
+
+background-color: #00aeec;
+
+border-radius: 15%/25%;
+border:none
+
+}
 </style>
     {% load_tctip %}
 </head>
@@ -74,16 +128,12 @@ padding-bottom: 0px;
 <body>
 
     <div id="wrapper" >
-
         <nav class="navbar navbar-default top-navbar" role="navigation">
-
-
 
                     <img  src = "https://p.ananas.chaoxing.com/star3/origin/6374c6713b55ff028ae4d3553003baa3.png"  width ="100",height ="200" />
 
-
-
             <div class="navbar-header">
+
 
                 <button type="button"id="b" class="navbar-brand" data-toggle="collapse" data-target=".sidebar-collapse">
                     <i class="fa fa-bars icon">菜单</i>
@@ -119,7 +169,6 @@ padding-bottom: 0px;
                 </li>
                 <!-- /.dropdown -->
             </ul>
-
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -136,6 +185,7 @@ padding-bottom: 0px;
                     </li>
                     <li>
                         <a href="/index/0"><i class="fa fa-sitemap"></i> FuHua视频网站链接解析<span class="fa arrow"></span></a>
+
                         <ul class="nav nav-second-level">
                             <li>
                         <a href="/index/0"><i class="fa fa-dashboard"></i>解析主页</a>
@@ -263,33 +313,62 @@ padding-bottom: 0px;
 		<div id="page-wrapper">
 		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua视频<br> <small>俄罗斯方块小游戏</small>
+                            欢迎使用FuHua视频 <small>富华视频图片识别文字功能</a></small>
                         </h2>
 
 
+              <div >
+                   <form method="post" enctype="multipart/form-data" target="_self">
+          {% csrf_token %}
 
+                           <input  type="file" name="file_name">
+                            <button id="az" type="submit"><font color="white" size="3">识别</font></button>
+
+
+                   </form>
+                  </div>
+
+<br>
+
+
+       <div >
+                {% for p in words%}
+    <p>{{p.words}}</p>
+                {% endfor%}
+
+</div>
 
 
 		</div>
             <br>
-            <div >
 
-                 <embed width=100% height="650" src='https://wxurl.cn/U0T'/>
+            <!-- /. PAGE INNER  -->
+
+        </div>
+
+
+
+        <!-- /. PAGE WRAPPER  -->
+<div style="text-align:center;">
+    <br>
+        <br>
+
+
+                <br>
+            <br>
+            <br>
+            <br>
+    <div><p><font color="white">&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by</font> <a href=""
+                    target="blank">ShiHaoyang</a></p></div>
 
             </div>
-            <!-- /. PAGE INNER  -->
-            <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
-                    target="blank">ShiHaoyang</a></p>
-        </div>
-        <!-- /. PAGE WRAPPER  -->
+
     </div>
+</div>
 
 
 
-    <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
+    <!-- /. WRAPPER  --> <script src="{% static '/js/jquery-1.10.2.js'%}"></script>
     <!-- Bootstrap Js -->
     <script src="{% static '/js/bootstrap.min.js'%}"></script>
 
@@ -311,8 +390,18 @@ padding-bottom: 0px;
 
     <!-- Chart Js -->
     <script type="text/javascript" src="{% static '/js/Chart.min.js'%}"></script>
-    <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>
+    <script type="text/javascript" src="{% static '/js/chartjs.js'%}"></script>v
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+

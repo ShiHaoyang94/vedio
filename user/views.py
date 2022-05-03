@@ -14,14 +14,14 @@ def login(request):
     if request.method == 'GET':
         if request.session.get('username') :
 
-            return HttpResponseRedirect('/movies/search/1')
+            return HttpResponseRedirect('/index/main/')
 
 
         elif request.COOKIES.get('username'):
 
             request.session['username'] = request.COOKIES.get('username')
 
-            return HttpResponseRedirect('/movies/search/1')
+            return HttpResponseRedirect('/index/main/')
         else:
             return render(request, 'login.html')
 
@@ -59,7 +59,7 @@ def login(request):
                 if 'remenber'in request.POST:
 
 
-                    resq = HttpResponseRedirect('/movies/search/1')
+                    resq = HttpResponseRedirect('/index/main/')
                     resq.set_cookie('username',login_username,60*60*24*3)
                     # resq.set_cookie('uid',User.id)
 
@@ -69,7 +69,7 @@ def login(request):
 
                 else:
 
-                    return HttpResponseRedirect('/movies/search/1')
+                    return HttpResponseRedirect('/index/main/')
 
             else:
 
