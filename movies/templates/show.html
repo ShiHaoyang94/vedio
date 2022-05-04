@@ -313,7 +313,7 @@ border:none
 		<div id="page-wrapper">
 		  <div class="header">
                         <h2 class="page-header">
-                            欢迎使用FuHua影视 <small><a href="/movies/show/">点击返回FuHua影视网搜索引擎</a></small>
+                            欢迎使用FuHua影视 <small><a href="/movies/search/">点击返回FuHua影视网搜索引擎</a></small>
                         </h2>
 
 
@@ -329,14 +329,14 @@ border:none
 
                 <div class="box">
                     <div style=" text-align:center;margin:0 auto;">
-                        <a href="/movies/about{{p.url}}"><img referrerpolicy="no-referrer" src="{{p.cover}}"  style="width:300px;"></a>
+                        <a href="/movies/about/{{p.VodID}}"><img referrerpolicy="no-referrer" src="{{p.VodPic}}"  style="width:300px;"></a>
 
                         <div >
 
-                            <h4>{{p.title}}</h4>
-                            <div >{{p.daoyan}}</div>
-                            <div >{{p.actor}}</div>
-                            <div ><a>{{p.smsg}}</a></div>
+                            <h4>{{p.VodName}}</h4>
+                            <div >{{p.VodYear}}</div>
+                            <div >{{p.VodActor}}</div>
+                            <div ><a>{{p.VodRemarks}}</a></div>
                         </div>
                     </div>
 
@@ -364,9 +364,7 @@ border:none
     <br>
         <br>
 
-                 <div >
-                    <button id="az" onclick="window.location.href='/movies/search/{{page}}/'"><font color="white" size="3" > 下一页 </font></button>
-                </div>
+
                 <br>
             <br>
             <br>

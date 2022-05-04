@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rr83xcuh1)is*ok4^ai2dxgudcg!u1k!wvg^ush+-zg4_k=y%u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middleware.middleware.SimpleMiddleware',
     # 'middleware.middleware.IpMiddleware'
-    'middleware.middleware.ExceptionMW'
+    #'middleware.middleware.ExceptionMW'
 
 ]
 

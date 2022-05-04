@@ -260,11 +260,11 @@ padding-bottom: 0px;
                             FuHua影视 <small>欢迎使用FuHua影视网搜索引擎</a></small>
                         </h2>
 
-                            <form method="post">
+                            <form method="post" target="_self">
                                 {% csrf_token %}
 
                                 <div>
-                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="name" placeholder="输入影片名或演员" style="width:auto;display:inline;">
+                                    <input type="captcha" v-on="blur:captchaCheck" class="form-control flat"required="required" name="name" placeholder="输入影片名" style="width:auto;display:inline;">
                                     <button v-on="click:onSubmit" id="a" style="display:inline"type="submit"><font color="white" size="3"> 搜索 </font></button>
                                 </div>
 

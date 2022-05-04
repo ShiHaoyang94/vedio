@@ -5,7 +5,6 @@ from django.shortcuts import render
 import requests, re
 from django.contrib import messages
 
-
 # Create your views here.
 from vedio import settings
 
@@ -124,18 +123,7 @@ def tiyu(request, name):
 
         ]
 
-        resq = HttpResponseRedirect('/index')
-
-        try:
-
-            resq.delete_cookie('last_web')
-            request.COOKIES.get('web')
-            last_web = (play_line_json[int(name) - 1].get('url')) + request.COOKIES.get('web')
-        except Exception as e:
-            last_web = (play_line_json[int(name) - 1].get('url'))
-        resq.set_cookie('last_web', last_web, 60 * 60 * 2)
-
-        return resq
+        return render(request, 'tiyu.html', {'web': play_line_json[int(name) - 1].get('url')})
 
 
 def douyin(request):
@@ -169,15 +157,17 @@ def douyin(request):
         except Exception as e:
             return HttpResponseRedirect('/busy')
 
+
 def elsfk(request):
     if request.method == 'GET':
-
         return render(request, 'elsfk.html')
+
 
 def xbw(request):
     if request.method == 'GET':
-
         return render(request, 'xbw.html')
+
+
 def words(request):
     if request.method == 'GET':
 
@@ -188,53 +178,60 @@ def words(request):
         import requests
         from datetime import datetime
         print(datetime.now())
+        try:
+            file_name = request.FILES['file_name']
+            file_names = os.path.join(settings.MEDIA_ROOT, request.session.get('username'))
+            with open(file_names, 'wb') as f:
+                data = file_name.file.read()
+                f.write(data)
 
-        file_name = request.FILES['file_name']
+            # 获取access_token
+            # client_id 为官网获取的AK， client_secret 为官网获取的SK
+            appid = '26149347'
+            client_id = 'M9LCsi0v2Q9wHTDDiFQH8R06'
+            client_secret = 'TasRoL1atapwOvwkdzNK9u67ctqM0NG7'
+            print("appid:" + appid)
+            print("client_id:" + client_id)
+            print("client_secret:" + client_secret)
 
-        file_names = os.path.join(settings.MEDIA_ROOT,request.session.get('username'))
-        with open(file_names,'wb') as f:
-            data = file_name.file.read()
-            f.write(data)
+            token_url = "https://aip.baidubce.com/oauth/2.0/token"
+            host = f"{token_url}?grant_type=client_credentials&client_id={client_id}&client_secret={client_secret}"
 
-        # 获取access_token
-        # client_id 为官网获取的AK， client_secret 为官网获取的SK
-        appid = '26149347'
-        client_id = 'M9LCsi0v2Q9wHTDDiFQH8R06'
-        client_secret = 'TasRoL1atapwOvwkdzNK9u67ctqM0NG7'
-        print("appid:" + appid)
-        print("client_id:" + client_id)
-        print("client_secret:" + client_secret)
+            response = requests.get(host)
+            access_token = response.json().get("access_token")
 
-        token_url = "https://aip.baidubce.com/oauth/2.0/token"
-        host = f"{token_url}?grant_type=client_credentials&client_id={client_id}&client_secret={client_secret}"
+            # 调用通用文字识别高精度版接口
+            request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic"
+            # 以二进制方式打开图文件
+            # 参数image：图像base64编码
+            # 下面图片路径请自行切换为自己环境的绝对路径
+            with open(file_names, "rb") as f:
+                image = base64.b64encode(f.read())
 
-        response = requests.get(host)
-        access_token = response.json().get("access_token")
+            body = {
+                "image": image,
+                "language_type": "auto_detect",
+                "detect_direction": "true",
+                "paragraph": "true",
+                "probability": "true",
+            }
+            headers = {"Content-Type": "application/x-www-form-urlencoded"}
+            request_url = f"{request_url}?access_token={access_token}"
+            response = requests.post(request_url, headers=headers, data=body)
+            content = response.json()
+            print(content)
+            os.remove(file_names)
+            # 打印调用结果
 
-        # 调用通用文字识别高精度版接口
-        request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic"
-        # 以二进制方式打开图文件
-        # 参数image：图像base64编码
-        # 下面图片路径请自行切换为自己环境的绝对路径
-        with open(file_names, "rb") as f:
-            image = base64.b64encode(f.read())
+            return render(request, 'words.html', {'words': content['words_result']})
 
-        body = {
-            "image": image,
-            "language_type": "auto_detect",
-            "detect_direction": "true",
-            "paragraph": "true",
-            "probability": "true",
-        }
-        headers = {"Content-Type": "application/x-www-form-urlencoded"}
-        request_url = f"{request_url}?access_token={access_token}"
-        response = requests.post(request_url, headers=headers, data=body)
-        content = response.json()
-        print(content)
-        os.remove(file_names)
-        # 打印调用结果
+        except Exception as e:
 
-        return render(request, 'words.html', {'words': content['words_result']})
+            messages.success(request,
+                             "图片不为空，现阶段我们支持的图片格式为：PNG、JPG、JPEG、BMP，请进行转码或更换图片，现阶段我们支持的图片大小为：base64编码后小于4M，分辨率不高于4096*4096，请重新上传图片，现阶段不支持 10M 或以上的数据包")
+
+            return HttpResponseRedirect('/index/words/')
+
 
 def laji(request):
     if request.method == 'GET':
@@ -247,16 +244,17 @@ def laji(request):
         app_secret = 'TjBhTUpiZEpSZlAxSlVIc09IRWQ2UT09'
         from urllib import parse
         keyword = parse.quote(name)
-        url = 'https://www.mxnzp.com/api/rubbish/type?name='+keyword+'&app_id='+app_id+'&app_secret='+app_secret
+        url = 'https://www.mxnzp.com/api/rubbish/type?name=' + keyword + '&app_id=' + app_id + '&app_secret=' + app_secret
         headers = {
             'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Mobile Safari/537.36'
         }
 
         response = requests.get(url, headers=headers)
-        jsons=response.json()
+        jsons = response.json()
         return render(request, 'laji.html', {'jsons': jsons.get("data")})
+
+
 def main(request):
     if request.method == 'GET':
-
         return render(request, 'main.html')
 

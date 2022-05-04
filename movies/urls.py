@@ -7,8 +7,8 @@ urlpatterns = [
 
 
     path('show/',views.show),
-    path('search/<int:page>/',views.search),
-    path('about/<str:url>/<str:urls>/',views.about),
+    path('search/',views.search),
+    path('about/<str:url>',views.about),
     path('play/<str:url>/',views.play)
 
 ]

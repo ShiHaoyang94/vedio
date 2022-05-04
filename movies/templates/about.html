@@ -297,7 +297,7 @@ padding-bottom: 0px;
                         <h2 class="page-header">
                             欢迎使用FuHua影视 <small>影片介绍</small>
                             <br>
-                            <small><a href="/movies/search/1">返回</a></small>
+                            <small><a href="/movies/search">返回</a></small>
                         </h2>
 
 
@@ -311,40 +311,45 @@ padding-bottom: 0px;
                 <div >
                     <div class="media mb-3">
                         <div style=" text-align:center;margin:0 auto;">
-                        <img referrerpolicy="no-referrer" class="mr-3 rounded align-self-center info-cover" style="width:600x;" src="{{json.cover}}">
+                        <img referrerpolicy="no-referrer" class="mr-3 rounded align-self-center info-cover" style="width:600x;" src="{{json.vod.VodPic}}">
 
-                            <h1 >{{json.title}}</h1>
-
-
+                            <h1 >{{json.vod.VodName}}</h1>
 
 
-                            <div class="text-secondary info-zhuyan"><h3>评分： {{json.pingfen}}</h3></div>
-                            <div class="col info-diqu"><h3>地区：{{json.diqu}}</h3></div>
-                            <div class="col info-nianfen"><h3>年份：{{json.nianfen}}</h3></div>
-                        <div class="info-updateTime mb-1"><h3>更新时间：{{json.gengxin}}</h3></div>
 
-                        <div class="info-movieType"><h3>分类：<span class="badge badge-pill badge-secondary mr-1">{{json.type}}</span></h3></div>
-                        <div class="text-secondary info-zhuyan"><h3>{{json.smsg}}</h3></div>
+
+                            <div class="text-secondary info-zhuyan"><h3>评分： {{json.vod.VodScore}}</h3></div>
+                            <div class="col info-diqu"><h3>导演：{{json.vod.VodDirector}}</h3></div>
+                            <div class="col info-nianfen"><h3>年份：{{json.vod.VodYear}}</h3></div>
+                        <div class="info-updateTime mb-1"><h3>区域：{{json.vod.VodArea}}</h3></div>
+
+                        <div class="info-movieType"><h3>分类：<span class="badge badge-pill badge-secondary mr-1">{{json.vod.VodClass.TypeName}}</span></h3></div>
+                        <div class="text-secondary info-zhuyan"><h3>{{json.vod.VodRemarks}}</h3></div>
                             <hr>
                               </div>
                     </div>
 
 
                 </div>
-                        <div class="info-desc"><h3>简介：</h3><br><h4>{{json.msg}}</h4></div>
+                        <div class="info-desc"><h3>简介：</h3><br><h4>{{json.vod.VodContent}}</h4></div>
 
 
             </div>
 
-                {% for p in json.play%}
+                {% for p in json2%}
 
                 <div class="playLists" style="">
                     <div class="playList shadow rounded p-3 mb-3">
-                    <h3>播放线路: </h3>
+                    <h3>播放线路{{json.vod.VodPlayUrls.key}}: </h3>
                         <br>
                     {% for j in p%}
-                        <button id="a"><a href="/movies{{j.url}}"><font color="white" size="3">{{j.title}}</font></a></button>&emsp;
+                        <form method="post" target="_self">
+                                {% csrf_token %}
+
+                        <button id="a"><input  type="hidden" name="url" value="{{j.1}}" /><font color="white" size="3">{{j.0}}</font></a></button>&emsp;
                         {% endfor %}
+                        </form>
+
                 </div>
                 </div>
 
