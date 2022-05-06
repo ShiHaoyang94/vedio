@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from movies import views
 
@@ -7,8 +7,9 @@ urlpatterns = [
 
 
     path('show/',views.show),
-    path('search/',views.search),
+    path('search/<str:name>',views.search),
     path('about/<str:url>',views.about),
-    path('play/<str:url>/',views.play)
+    re_path('^play/$', views.play),
+
 
 ]

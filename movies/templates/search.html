@@ -32,6 +32,43 @@ Website: http://www.webthemez.com/
 
 
 <style>
+/* 小屏幕手机端 */
+	@media (min-width: 0px) and (max-width:768px) {
+	.box{
+           float: left;
+           width: 100%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:auto;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+
+	}
+
+
+
+	/* 大屏幕（大于等于 1200px） */
+	@media (min-width: 768px) {
+	.box{
+           float: left;
+           width: 32%;
+           padding-bottom: 32%;
+           background-color:#F0FFFF;
+           margin-bottom: 1%;
+           height:600px;
+       }
+.box:not(:nth-child(3n)){
+           margin-right: 1%;
+       }
+	}
+.container::after{
+           content: "";
+           display: block;
+           clear: both;
+       }
     #a{undefined
 
 width:300px;
@@ -126,7 +163,7 @@ padding-bottom: 0px;
                         <a href="/index/main/"><i class="fa fa-dashboard"></i>FuHua主页</a>
                     </li>
                     <li>
-                        <a href="/movies/search/1"><i class="fa fa-dashboard"></i> FuHua影视</a>
+                        <a href="/movies/search/h"><i class="fa fa-dashboard"></i> FuHua影视</a>
                     </li>
                     <li>
                         <a href="/index/0"><i class="fa fa-sitemap"></i> FuHua视频网站链接解析<span class="fa arrow"></span></a>
@@ -137,36 +174,7 @@ padding-bottom: 0px;
                             <li>
                         <a href="#"><i class="fa fa-sitemap"></i>更换线路<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/index/0">纯净1</a>
-                            </li>
-                            <li>
-                                <a href="/index/1">B站1</a>
-                            </li>
-                            <li>
-                                <a href="/index/2">爱跟</a>
-                            </li>
-                            <li>
-                                <a href="/index/3">爱豆</a>
-                            </li>
-                            <li>
-                                <a href="/index/4">BL</a>
-                            </li>
-                            <li>
-                                <a href="/index/5">冰豆</a>
-                            </li>
-                            <li>
-                                <a href="/index/6">百域</a>
-                            </li>
-                            <li>
-                                <a href="/index/7">CK</a>
-                            </li>
-                            <li>
-                                <a href="/index/8">CHok</a>
-                            </li>
-                            <li>
-                                <a href="/index/9">ckmov</a>
-                            </li>
+
                             <li>
                                 <a href="/index/10">大幕</a>
                             </li>
@@ -269,7 +277,49 @@ padding-bottom: 0px;
                                 </div>
 
                             </form>
+              <br>
+              <br>
+              <br>
+
+              <button id="a"><a href="/movies/search/h"><font color="white" size="3">本周热播</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/m"><font color="white" size="3">最新电影</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/t"><font color="white" size="3">最新连续剧</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/s"><font color="white" size="3">最新综艺</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/c"><font color="white" size="3">最新动漫</font></a></button>
+              <br>
+              <br>
+              <br>
+              <button id="a"><a href="/movies/search/movie"><font color="white" size="3">本周电影排行榜</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/show"><font color="white" size="3">本周综艺排行榜</font></a></button>&emsp;
+                  <button id="a"><a href="/movies/search/teleplay"><font color="white" size="3">本周电视剧排行榜</font></a></button>&emsp;
+
+
+
               <div >
+                  <h4>{{title}}</h4>
+                  <div >
+
+
+
+
+                {% for p in json%}
+
+                <div class="box">
+                    <div style=" text-align:center;margin:0 auto;">
+                        <a href="/movies/about/{{p.VodID}}"><img referrerpolicy="no-referrer" src="{{p.VodPic}}"  style="width:300px"></a>
+
+                        <div >
+
+                            <h4>{{p.VodName}}</h4>
+                            <span class="badge badge-pill badge-secondary mr-1">{{p.VodHits}} 人/次</span>
+                            <div >{{p.VodYear}}</div>
+                            <div >{{p.VodActor}}</div>
+                            <div ><a>{{p.VodRemarks}}</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+                  </div>
 
 
             </div>
@@ -278,7 +328,11 @@ padding-bottom: 0px;
 
 		</div>
             <br>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <!-- /. PAGE INNER  -->
             <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
                     target="blank">ShiHaoyang</a></p>

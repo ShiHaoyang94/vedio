@@ -164,7 +164,7 @@ padding-bottom: 0px;
                         <a href="/index/main/"><i class="fa fa-dashboard"></i>FuHua主页</a>
                     </li>
                     <li>
-                        <a href="/movies/search/1"><i class="fa fa-dashboard"></i> FuHua影视</a>
+                        <a href="/movies/search/h"><i class="fa fa-dashboard"></i> FuHua影视</a>
                     </li>
                     <li>
                         <a href="/index/0"><i class="fa fa-sitemap"></i> FuHua视频网站链接解析<span class="fa arrow"></span></a>
@@ -176,34 +176,34 @@ padding-bottom: 0px;
                         <a href="#"><i class="fa fa-sitemap"></i>更换线路<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/index/0">纯净1</a>
+                                <a href="/index/0">M1907解析</a>
                             </li>
                             <li>
-                                <a href="/index/1">B站1</a>
+                                <a href="/index/1">虾米解析</a>
                             </li>
                             <li>
-                                <a href="/index/2">爱跟</a>
+                                <a href="/index/2">ok解析</a>
                             </li>
                             <li>
                                 <a href="/index/3">爱豆</a>
                             </li>
                             <li>
-                                <a href="/index/4">BL</a>
+                                <a href="/index/4">解析啦</a>
                             </li>
                             <li>
-                                <a href="/index/5">冰豆</a>
+                                <a href="/index/5">LEC解析</a>
                             </li>
                             <li>
-                                <a href="/index/6">百域</a>
+                                <a href="/index/6">8090解析</a>
                             </li>
                             <li>
-                                <a href="/index/7">CK</a>
+                                <a href="/index/7">mao</a>
                             </li>
                             <li>
-                                <a href="/index/8">CHok</a>
+                                <a href="/index/8">M3u8解析</a>
                             </li>
                             <li>
-                                <a href="/index/9">ckmov</a>
+                                <a href="/index/9">PM解析</a>
                             </li>
                             <li>
                                 <a href="/index/10">大幕</a>
@@ -297,7 +297,7 @@ padding-bottom: 0px;
                         <h2 class="page-header">
                             欢迎使用FuHua影视 <small>影片介绍</small>
                             <br>
-                            <small><a href="/movies/search">返回</a></small>
+                            <small><a href="/movies/search/h">返回</a></small>
                         </h2>
 
 
@@ -343,24 +343,76 @@ padding-bottom: 0px;
                     <h3>播放线路{{json.vod.VodPlayUrls.key}}: </h3>
                         <br>
                     {% for j in p%}
-                        <form method="post" target="_self">
-                                {% csrf_token %}
 
-                        <button id="a"><input  type="hidden" name="url" value="{{j.1}}" /><font color="white" size="3">{{j.0}}</font></a></button>&emsp;
+
+
+                        <button id="a"><a href="/movies/play/?name={{json.vod.VodName}}{{j.0}}&url={{j.1}}" ><font color="white" size="3">{{j.0}}</font></a></button>&emsp;
                         {% endfor %}
-                        </form>
+
 
                 </div>
                 </div>
 
                 {% endfor %}
+                  <div >
+                      <br>
+                      <br>
+                      <br>
+                      <h3>猜你喜欢：</h3>
+                      <br>
+                      <br>
+
+                {% for p in json.rand%}
+
+                <div class="box">
+                    <div style=" text-align:center;margin:0 auto;">
+                        <a href="/movies/about/{{p.VodID}}"><img referrerpolicy="no-referrer" src="{{p.VodPic}}"  style="width:300px;"></a>
+
+                        <div >
+
+                            <h4>{{p.VodName}}</h4>
+                            <div >{{p.VodYear}}</div>
+                            <div >{{p.VodActor}}</div>
+                            <div ><a>{{p.VodRemarks}}</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+                      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                      <h3>相关推荐：</h3>
+                      <br>
+                      <br>
+
+                       {% for p in json.relate%}
+
+                <div class="box">
+                    <div style=" text-align:center;margin:0 auto;">
+                        <a href="/movies/about/{{p.VodID}}"><img referrerpolicy="no-referrer" src="{{p.VodPic}}"  style="width:300px;"></a>
+
+                        <div >
+
+                            <h4>{{p.VodName}}</h4>
+                            <div >{{p.VodYear}}</div>
+                            <div >{{p.VodActor}}</div>
+                            <div ><a>{{p.VodRemarks}}</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+
+
+
 
 </div>
 
 
 		</div>
-            <br>
-
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <!-- /. PAGE INNER  -->
             <p>&copy; 2022 Service Video Parsing Techniques. All Rights Reserved | Design by <a href=""
                     target="blank">ShiHaoyang</a></p>
